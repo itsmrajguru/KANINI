@@ -1,0 +1,24 @@
+{
+  "name": "typescript-specialties",
+  "version": "1.0.0",
+  "description": "What TypeScript actually adds over JavaScript - my mentor demo project",
+  "scripts": {
+    "annotations": "ts-node \"1_TypeAnnotationsInference/index.ts\"",
+    "interfaces": "ts-node \"2_InterfacesTypeAliases/index.ts\"",
+    "unions": "ts-node \"3_UnionIntersectionTypes/index.ts\"",
+    "narrowing": "ts-node \"4_TypeNarrowingGuards/index.ts\"",
+    "enums": "ts-node \"5_Enums/index.ts\"",
+    "generics": "ts-node \"6_Generics/index.ts\"",
+    "modifiers": "ts-node \"7_AccessModifiers/index.ts\"",
+    "utility": "ts-node \"8_UtilityTypes/index.ts\"",
+    "unknown": "ts-node \"9_UnknownVsAny/index.ts\"",
+    "strictnull": "ts-node \"10_StrictNullChecks/index.ts\"",
+    "overloads": "ts-node \"11_FunctionOverloads/index.ts\"",
+    "assertions": "ts-node \"12_TypeAssertionsSatisfies/index.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
