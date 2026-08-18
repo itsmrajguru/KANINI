@@ -1,6 +1,7 @@
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.Helpers;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Models;
 
 namespace LibraryManagementAPI.Services

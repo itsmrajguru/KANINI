@@ -1,6 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 using LibraryManagementAPI.Models.Enums;
 
+
+/* Best defination of DTO(Data Transfer Object)
+
+in MERN Stack, When we need some data from the user we were taking the only data, 
+we need from req.body ex...const{id,name}=req.body
+
+but in .NET
+We've created a separate file for this API data transfer called Data Transfer Object
+Why do we need this?
+So
+DTO to separate the API contract from the database entity. The DTO controls what data the 
+API receives or returns,while the Book entity represents the data that EF Core works with 
+for database operations. 
+
+Book = how my application/database represents a book.
+BookDto = what information I want to transfer through my API.*/
 namespace LibraryManagementAPI.DTOs
 {
     // What the client sends to register a new user

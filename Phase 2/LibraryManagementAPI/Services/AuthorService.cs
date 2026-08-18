@@ -1,24 +1,35 @@
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementAPI.Services
 {
-    // Handles all author operations using the database
+    /*
+    As IBookservice is the contract , the BookService is the actual Implementation
+    
+    Controller handles HTTP/API concerns.
+    Service handles application/business logic.
+    DbContext handles database interaction.
+    */
     public class AuthorService : IAuthorService
     {
         private readonly LibraryDbContext _context;
         private readonly ILogger<AuthorService> _logger;
 
+
         public AuthorService(LibraryDbContext context, ILogger<AuthorService> logger)
         {
+            /* ILogger<T> is already provided by ASP.NET Core's built-in logging system. */
             _context = context;
             _logger = logger;
         }
 
         public List<AuthorDto> GetAllAuthors()
         {
+            /* Entity Framework Core is the ORM used in our project. It allows us to interact with the MySQL
+             database using C# entities and LINQ instead of writing SQL for every operation. */
             return _context.Authors
                 .Include(a => a.Books)
                 .Select(a => MapToDto(a))

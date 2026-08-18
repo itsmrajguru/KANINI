@@ -1,12 +1,11 @@
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementAPI.Services
 {
-    // Real Database Service: Contains logic to interact with MySQL via EF Core.
-    // Implements IBookService, so it can easily replace BookService.
     public class DatabaseBookService : IBookService
     {
         private readonly LibraryDbContext _context;
@@ -81,7 +80,12 @@ namespace LibraryManagementAPI.Services
             }
 
             book.Title = dto.Title;
+
+            // Recalculate AvailableCopies when TotalCopies changes
+            var issuedCopies = book.TotalCopies - book.AvailableCopies; // how many are currently borrowed
             book.TotalCopies = dto.TotalCopies;
+            book.AvailableCopies = Math.Max(0, dto.TotalCopies - issuedCopies);
+
             book.AuthorId = author.Id;
             book.CategoryId = dto.CategoryId;
 

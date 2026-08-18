@@ -1,5 +1,5 @@
 using LibraryManagementAPI.DTOs;
-using LibraryManagementAPI.Services;
+using LibraryManagementAPI.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +23,7 @@ namespace LibraryManagementAPI.Controllers
         public IActionResult IssueBook([FromBody] CreateIssueDto dto)
         {
             var issue = _issueService.IssueBook(dto);
-            return CreatedAtAction(null, issue);
+            return StatusCode(201, issue);
         }
 
         [HttpPut("{id}/return")]          // PUT /api/issue/1/return — mark book as returned

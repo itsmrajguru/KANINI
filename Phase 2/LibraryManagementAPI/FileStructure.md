@@ -1,6 +1,6 @@
 
 1) bin -->
-This is a auto-generates Folder.
+This is a auto-generated Folder.
 when you run commands like dotnet run or dotnet build to compile files,
 then the generated .exe and .dll files are stored here.
 --> In short , it contain all compiled files

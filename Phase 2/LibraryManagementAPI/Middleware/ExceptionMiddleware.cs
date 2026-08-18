@@ -33,12 +33,26 @@ namespace LibraryManagementAPI.Middleware
         private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            // Map specific exceptions to proper HTTP status codes
+            context.Response.StatusCode = ex switch
+            {
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,          // 404
+                InvalidOperationException => (int)HttpStatusCode.BadRequest,   // 400
+                UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized, // 401
+                _ => (int)HttpStatusCode.InternalServerError                   // 500
+            };
 
             var response = new
             {
                 statusCode = context.Response.StatusCode,
-                message = "Something went wrong. Please try again.",
+                message = ex switch
+                {
+                    KeyNotFoundException => ex.Message,
+                    InvalidOperationException => ex.Message,
+                    UnauthorizedAccessException => ex.Message,
+                    _ => "Something went wrong. Please try again."
+                },
                 detail = ex.Message
             };
 

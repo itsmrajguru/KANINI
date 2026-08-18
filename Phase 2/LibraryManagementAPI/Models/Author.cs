@@ -1,5 +1,3 @@
-using LibraryManagementAPI.Models.Enums;
-
 namespace LibraryManagementAPI.Models
 {
     // Author of a book — one author can write many books

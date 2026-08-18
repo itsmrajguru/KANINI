@@ -1,5 +1,6 @@
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,6 @@
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.Helpers;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Middleware;
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+//here we configure a asp.net application using builder
 var builder = WebApplication.CreateBuilder(args);
 
 // Register all controllers in the project
@@ -52,9 +54,9 @@ builder.Services.AddSwaggerGen(options =>
 // Configure EF Core with Pomelo MySQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<LibraryDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0))));
 
-// JWT: validate token on every protected request
+//added JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -71,7 +73,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// CORS: allow any origin for local development
+// added cors to accept request from any frotend like swagger, postman or React
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevPolicy", policy =>
@@ -80,7 +82,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Dependecny Injection Added :AddScoped,singleton and transient one new instance per HTTP request
+//These are the Dependency Injections
+/* Dependency Injection : 
+It is a design pattern  Where the class doesn't create objects it depends on,
+instaed the dependencies that are already created as services and listed in the interface
+are directly provided directly by the .NET's DI container in the program.cs */
 builder.Services.AddScoped<IBookService, DatabaseBookService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -90,9 +96,10 @@ builder.Services.AddScoped<IFineService, FineService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 
-// JwtHelper builds tokens — singleton because it has no state
+// JwtHelper builds tokens
 builder.Services.AddSingleton<JwtHelper>();
 
+/* This is the line responsible for building the whole application using the configurations */
 var app = builder.Build();
 
 // Catch all unhandled exceptions and return clean JSON error
@@ -106,9 +113,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("DevPolicy");
 
-// Authentication must come before Authorization in the pipeline
+/* Middlewares */
 app.UseAuthentication();
 app.UseAuthorization();
 
+//this mapcontroller maps the HTTP request to the appropriate controller
 app.MapControllers();
+
+//it is smimiliar to app.listen(PORT)
 app.Run();

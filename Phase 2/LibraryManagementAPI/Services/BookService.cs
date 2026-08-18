@@ -1,9 +1,8 @@
 using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Interfaces;
 
 namespace LibraryManagementAPI.Services
 {
-    // In-memory fake service — kept for reference only, DatabaseBookService is used in production.
-    // This class is NOT registered in DI — it's just here so the project remembers how we started.
     public class BookService : IBookService
     {
         private static readonly List<(int Id, string Title, string AuthorName, int CategoryId, int Total, int Available)> _books = new();
