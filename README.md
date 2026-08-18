@@ -143,7 +143,7 @@ HTML / CSS / JS    →    C# / .NET / MySQL     →     React / Vite / AI
 **Mangesh Rajguru** — Full Stack .NET Developer Intern @ KANINI
 
 - 🌐 Portfolio: [mrajguru.vercel.app](https://mrajguru.vercel.app)
-- 💼 LinkedIn: [Mangesh Rajguru](https://www.linkedin.com/in/mangesh-rajguru-800641373/)
+- 💼 LinkedIn: [Mangesh Rajguru](https://www.linkedin.com/in/mangesh-s-rajguru-800641373/)
 - 📧 Email: [msrajguru7@gmail.com](mailto:msrajguru7@gmail.com)
 - 🐙 GitHub: [@itsmrajguru](https://github.com/itsmrajguru)
 
